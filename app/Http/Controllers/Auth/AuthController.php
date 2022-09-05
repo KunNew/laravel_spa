@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Models\Menu;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class AuthController extends Controller
+{
+    public function user()
+    {
+        $menus = Menu::whereNull('parent_id')->with('children', function($q){ return $q->orderByRaw('ISNULL(ordering), ordering asc'); })->orderByRaw('ISNULL(ordering), ordering asc')->get();
+        $user = auth()->user();
+
+        $user->menus = $menus;
+        $user->ability = [
+            [
+                'action' => 'manage',
+                'subject' => 'all',
+            ],
+        ];
+        return json_data($user);
+    }
+}
