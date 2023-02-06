@@ -24,19 +24,19 @@
     </v-navigation-drawer>
     <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app dark>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>{{ $t('Dental Clinic') }}</v-toolbar-title>
+        <v-toolbar-title>Cafe</v-toolbar-title>
         <!-- <div v-if="$vuetify.breakpoint.smAndUp" class="ml-4 text-subtitle-2">Hello</div> -->
         <v-spacer></v-spacer>
-        <!-- <v-menu open-on-hover offset-y offset-overflow>
+        <v-menu open-on-hover offset-y offset-overflow>
             <template v-slot:activator="{ on, attrs }">
                 <v-avatar tile v-on="on" v-bind="attrs" class="mr-5">
-                    <v-img contain :src="storagePath + 'lang/' + $i18n.locale + '.png'"></v-img>
+                    <v-img contain :src="storagePath + '' + $i18n.locale + '.png'"></v-img>
                 </v-avatar>
             </template>
             <v-list dense>
                 <v-list-item @click="changeLanguage('km')">
                     <v-list-item-avatar tile>
-                        <v-img contain :src="storagePath + 'lang/km.png'"></v-img>
+                        <v-img contain :src="storagePath + '/km.png'"></v-img>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <v-list-item-title>{{ $t('lang.km') }}</v-list-item-title>
@@ -45,7 +45,7 @@
                 </v-list-item>
                 <v-list-item @click="changeLanguage('en')">
                     <v-list-item-avatar tile>
-                        <v-img contain :src="storagePath + 'lang/en.png'"></v-img>
+                        <v-img contain :src="storagePath + '/en.png'"></v-img>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <v-list-item-title>{{ $t('lang.en') }}</v-list-item-title>
@@ -53,7 +53,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
-        </v-menu> -->
+        </v-menu>
         <v-menu offset-y transition="slide-y-transition" v-if="user">
             <template v-slot:activator="{ on, attrs }">
                 <v-btn class="mr-2" icon v-bind="attrs" v-on="on">
@@ -82,7 +82,7 @@
                 </v-list>
                 <v-divider></v-divider>
                 <v-list>
-                    <v-list-item link dense :to="{ name: 'setting' }">
+                <v-list-item link dense :to="{ name: 'setting' }">
                         <v-list-item-icon>
                             <v-icon>mdi-cog</v-icon>
                         </v-list-item-icon>
@@ -112,7 +112,7 @@
     </v-main>
     <v-footer padless>
         <v-card flat tile width="100%" dark class="text-center">
-            <v-card-text class="white--text">{{ new Date().getFullYear() }} —<strong>{{ $t('powered_by') }} iTsumo Tech Co., Ltd</strong></v-card-text>
+            <v-card-text class="white--text">{{ new Date().getFullYear() }} —<strong> made by Code4You</strong></v-card-text>
         </v-card>
     </v-footer>
   </v-app>

@@ -57,7 +57,7 @@
 
 <style scoped>
     .fill_image {
-        background-image: url('../../../../public/storage/bg.jpg');
+        /* background-image: url('../../../../public/storage/bg.jpg'); */
         background-clip: content-box;
         background-size: cover;
     }

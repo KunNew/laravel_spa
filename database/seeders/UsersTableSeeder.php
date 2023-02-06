@@ -23,9 +23,9 @@ class UsersTableSeeder extends Seeder
         $user->email = 'system@email.com';
         $user->password = Hash::make('system');
         $user->email_verified_at = now();
-        $user->role = 'admin';
+        // $user->role = 'admin';
         $user->save();
-        
+
         $user = new User();
         $user->username = 'admin';
         $user->first_name = 'Super';
@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
         $user->email = 'admin@email.com';
         $user->password = Hash::make('superadmin');
         $user->email_verified_at = now();
-        $user->role = 'admin';
+        // $user->role = 'admin';
         $user->save();
     }
 }

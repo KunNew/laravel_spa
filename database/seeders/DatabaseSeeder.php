@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('oauth_clients')->insert([
             'name' => 'Dental Clinic Password Grant Client',
-            'id' => '97049084-d157-41bc-b04c-cd5b3038f425',
-            'secret' => 'nwB4aPcF59ynE67mALi5Bwk36zMNoBOj8r1pvhFA',
+            'id' => '985d0a68-077f-4d7f-9985-3f5bd9ac7ec6',
+            'secret' => 'VOGFx492fxDmWXJ6UOZnwd6sZI3CSPzeS3rO5OKi',
             'provider' => 'users',
             'redirect' => env('APP_URL'),
             'personal_access_client' => false,
@@ -28,6 +28,10 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        $this->call(UsersTableSeeder::class);
+        $this->call([
+        UsersTableSeeder::class,
+        PermissionSeeder::class,
+        RoleSeeder::class,
+        CategoriesTableSeeder::class]);
     }
 }

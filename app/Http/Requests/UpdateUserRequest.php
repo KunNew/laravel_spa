@@ -29,7 +29,8 @@ class UpdateUserRequest extends FormRequest
             'last_name' => 'required',
             'username' => ['required', Rule::unique('users', 'username')->ignore(request('user')->id)],
             'email' => ['required', Rule::unique('users', 'email')->ignore(request('user')->id)],
-            'role' => ['required', Rule::in(['admin', 'cashier'])],
+            // 'role' => ['required', Rule::in(['admin', 'cashier'])],
+            'role_id' => 'required',
             'avatar' => ['nullable', 'image']
         ];
     }

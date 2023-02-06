@@ -7,8 +7,8 @@
                 <v-skeleton-loader class="px-4 pb-3" type="text"></v-skeleton-loader>
             </template>
             <template v-else>
-                <v-card-title>User</v-card-title>
-                <v-card-subtitle>List all users.</v-card-subtitle>
+                <v-card-title>Permission</v-card-title>
+                <v-card-subtitle>List all permissions.</v-card-subtitle>
             </template>
         </v-card>
         <v-dialog v-model="diaglogDelete" max-width="500">
@@ -31,16 +31,8 @@
 
             <template #[`top`]>
                 <v-toolbar flat>
-                    <v-btn class="ma-1" color="primary" :to="{ name: 'user.create' }"><v-icon left>mdi-plus</v-icon>{{ $t('New user') }}</v-btn>
-                    <v-btn color="green" dark to="/role">
-                        <v-icon left>mdi-account</v-icon>
-                        Role</v-btn>
-                        <v-btn color="error" dark class="ml-1" to="/permission">
-                            <v-icon left>
-                                mdi-account-key
-                            </v-icon>
-                            Permission
-                        </v-btn>
+                    <v-btn class="ma-1" color="primary" :to="{ name: 'permission.create' }"><v-icon left>mdi-plus</v-icon>New permission</v-btn>
+
                     <v-spacer></v-spacer>
                     <!-- <div class="ma-3" style="width: 250px">
                         <v-text-field
@@ -59,29 +51,25 @@
                 {{ options.itemsPerPage * (options.page - 1) + index + 1 }}
             </template>
 
-            <template #[`item.avatar`]="{ item }" :ref="item.id">
-                <v-avatar size="64" class="ma-1" tile>
-                    <v-img :src="constant.storagePath + item.avatar" contain></v-img>
-                </v-avatar>
-            </template>
+
 
             <!-- actions -->
             <template #[`item.actions`]="{ item }">
                 <v-tooltip top>
                     <template #activator="{ on, attrs }">
-                        <v-btn color="primary" v-bind="attrs" icon small :to="{ name: 'user.show', params: { user: item.id } }" v-on="on"><v-icon>mdi-eye</v-icon></v-btn>
+                        <v-btn color="primary" v-bind="attrs" icon small :to="{ name: 'permission.show', params: { permission: item.id } }" v-on="on"><v-icon>mdi-eye</v-icon></v-btn>
                     </template>
                     <span>Detail</span>
                 </v-tooltip>
                 <v-tooltip top>
                     <template #activator="{ on, attrs }">
-                        <v-btn color="warning" icon small :to="{ name: 'user.edit', params: { user: item.id } }" v-bind="attrs" v-on="on"><v-icon>mdi-pencil-box-outline</v-icon></v-btn>
+                        <v-btn color="warning" icon small :to="{ name: 'permission.edit', params: { permission: item.id } }" v-bind="attrs" v-on="on"><v-icon>mdi-pencil-box-outline</v-icon></v-btn>
                     </template>
                     <span>Edit</span>
                 </v-tooltip>
                 <v-tooltip top>
                     <template #activator="{ on, attrs }">
-                        <v-btn color="error" :disabled="item.id === user.id" icon small v-bind="attrs" @click="onClickDelete(item)" v-on="on"><v-icon>mdi-trash-can-outline</v-icon></v-btn>
+                        <v-btn color="error"  icon small v-bind="attrs" @click="onClickDelete(item)" v-on="on"><v-icon>mdi-trash-can-outline</v-icon></v-btn>
                     </template>
                     <span>Delete</span>
                 </v-tooltip>
@@ -133,7 +121,7 @@ export default {
     methods: {
         async fetchData()
         {
-            axiosApiInstance.get('user', {
+            axiosApiInstance.get('permission', {
                 params: {
                     page: this.options.page,
                     perpage: this.options.itemsPerPage === -1 ? this.dataTable.totalItems : this.options.itemsPerPage,
@@ -160,7 +148,7 @@ export default {
         onConfirmDelete()
         {
             this.deleting = true
-            axiosApiInstance.delete(`user/${ this.deleteItem }`)
+            axiosApiInstance.delete(`permission/${ this.deleteItem }`)
             .then( response => {
                 this.fetchData()
                 this.$store.dispatch('pushNotification', { message: response.data.message, type: 'success' })

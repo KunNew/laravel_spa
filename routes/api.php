@@ -10,6 +10,10 @@ use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -83,8 +87,17 @@ Route::post('/reset-password', function (Request $request) {
 })->middleware('guest')->name('password.update');
 
 Route::middleware(['auth:api'])->get('/auth/user', [AuthController::class, 'user']);
+
 Route::group([
     'middleware' => ['auth:api', 'verified'],
 ], function () {
+
     Route::resource('user', UserController::class);
+    Route::put('setting/change_profile/{id}',[AuthController::class,'updateUserProfile']);
+    Route::put('setting/change_password/{id}', [AuthController::class, 'updatePassword']);
+
+    Route::resource('category', CategoryController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('permission', PermissionController::class);
+    Route::resource('role', RoleController::class);
 });
