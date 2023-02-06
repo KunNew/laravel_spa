@@ -6360,8 +6360,11 @@ axiosApiInstance.interceptors.response.use(function (response) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            originalRequest = error.config;
-            console.log(error, 'error');
+            originalRequest = error.config; // console.log(error.response.status,'error');
+
+            if (error.response.status == 403) {
+              _router__WEBPACK_IMPORTED_MODULE_3__["default"].push("/");
+            }
 
             if (!(error.response.status == 401 && !originalRequest._retry)) {
               _context.next = 7;

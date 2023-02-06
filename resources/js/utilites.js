@@ -42,8 +42,10 @@ axiosApiInstance.interceptors.response.use(
     },
     async (error) => {
         const originalRequest = error.config;
-        console.log(error,'error');
-
+        // console.log(error.response.status,'error');
+        if (error.response.status == 403) {
+            router.push("/");
+        }
 
         if (error.response.status == 401 && !originalRequest._retry) {
             originalRequest._retry = true;
